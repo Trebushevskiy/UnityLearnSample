@@ -4,8 +4,10 @@ using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
 [HelpURL("https://docs.google.com/document/d/1Cmm__cbik5J8aHAI6PPaAUmEMF3wAcNo3rpgzsYPzDM/edit?usp=sharing")]
+[System.Serializable]
 public class TransparentModule : MonoBehaviour
 {
+    [SerializeField]
     private float changeSpeed;
 
     private float defaultAlpha;
@@ -19,6 +21,7 @@ public class TransparentModule : MonoBehaviour
         toDefault = false;
     }
 
+    [ContextMenu("Activate")]
     public void ActivateModule()
     {
         float target = toDefault ? defaultAlpha : 0;
@@ -26,7 +29,7 @@ public class TransparentModule : MonoBehaviour
         StartCoroutine(ChangeTransparencyCoroutine(new Color(mat.color.r, mat.color.g, mat.color.b, target)));
         toDefault = !toDefault;
     }
-
+    [ContextMenu("Default")]
     public void ReturnToDefaultState()
     {
         toDefault = true;
