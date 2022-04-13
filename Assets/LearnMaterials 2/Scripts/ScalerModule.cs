@@ -2,12 +2,14 @@ using System.Collections;
 using UnityEngine;
 
 [HelpURL("https://docs.google.com/document/d/1rdTEVSrCcYOjqTJcFCHj46RvnbdJhmQUb3gHMDhVftI/edit?usp=sharing")]
+[System.Serializable]
 public class ScalerModule : MonoBehaviour
 {
-    private Vector3 targetScale = new Vector3(2,2,2);
+    [SerializeField]
+    private Vector3 targetScale = new Vector3(2, 2, 2);
 
+    [SerializeField]
     private float changeSpeed;
-
     private Vector3 defaultScale;
     private Transform myTransform;
     private bool toDefault;
@@ -19,6 +21,7 @@ public class ScalerModule : MonoBehaviour
         toDefault = false;
     }
 
+    [ContextMenu("Activate")]
     public void ActivateModule()
     {
         Vector3 target = toDefault ? defaultScale : targetScale;
@@ -27,6 +30,7 @@ public class ScalerModule : MonoBehaviour
         toDefault = !toDefault;
     }
 
+    [ContextMenu("Default")]
     public void ReturnToDefaultState()
     {
         toDefault = true;
@@ -37,7 +41,7 @@ public class ScalerModule : MonoBehaviour
     {
         Vector3 start = myTransform.lossyScale;
         float t = 0;
-        while(t < 1)
+        while (t < 1)
         {
             t += Time.deltaTime * changeSpeed;
             myTransform.localScale = Vector3.Lerp(start, target, t);
