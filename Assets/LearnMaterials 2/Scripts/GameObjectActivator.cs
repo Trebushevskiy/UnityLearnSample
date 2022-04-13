@@ -5,8 +5,10 @@ using UnityEngine;
 /// Задаёт указанным объектам значение activeSalfe, равное state
 /// </summary>
 [HelpURL("https://docs.google.com/document/d/1GP4_m0MzOF8L5t5pZxLChu3V_TFIq1czi1oJQ2X5kpU/edit?usp=sharing")]
+[System.Serializable]
 public class GameObjectActivator : MonoBehaviour
 {
+    [SerializeField]
     private List<StateContainer> targets;
     private bool debug;
 
@@ -17,10 +19,12 @@ public class GameObjectActivator : MonoBehaviour
             item.defaultValue = item.targetGO.activeSelf;
         }
     }
+    [ContextMenu("Activate")]
     public void ActivateModule()
     {
         SetStateForAll();
     }
+    [ContextMenu("To Default")]
     public void ReturnToDefaultState()
     {
         foreach (var item in targets)
